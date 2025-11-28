@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: okx-scraper
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/lebyanelm/okx-scraper
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: okx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

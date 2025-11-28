@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: okx-scraper
+  namespace: okx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: okx-scraper
+  template:
+    metadata:
+      labels:
+        app: okx-scraper
+    spec:
+      containers:
+        - name: bot
+          image: ghcr.io/YOURUSER/YOURBOT:latest
+          imagePullPolicy: Always
+          env:
+            - name: SEC_MASTER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: bot-secrets
+                  key: sec-master-name
+            - name: SEC_MASTER_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: bot-secrets
+                  key: sec-master-endpoint
+            - name: SEC_MASTER_PD
+              valueFrom:
+                secretKeyRef:
+                  name: bot-secrets
+                  key: sec-master-pd
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
