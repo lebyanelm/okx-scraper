@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: bot
-          image: ghcr.io/YOURUSER/YOURBOT:latest
+          image: ghcr.io/lebyanelm/okx-scraper:latest
           imagePullPolicy: Always
           env:
             - name: SEC_MASTER_NAME
