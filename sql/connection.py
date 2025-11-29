@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 # ---------------------------- CONNECTION -------------------------
 print(os.environ)
 DB_CONN = (
-    f"mysql+pymysql://{os.environ["SEC_USERNAME"]}:{os.environ["SEC_MASTER_PD"]}@"
+    f"mysql+pymysql://admin:{os.environ["SEC_MASTER_PD"]}@"
     f"{os.environ["SEC_MASTER_ENDPOINT"]}:3306/{os.environ["SEC_MASTER_NAME"]}"
 )
 Base = declarative_base()
