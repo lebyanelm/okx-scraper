@@ -1,3 +1,4 @@
+import os
 import modules.helpers
 from sqlalchemy import (
     create_engine
@@ -8,9 +9,10 @@ from sqlalchemy.orm import sessionmaker
 
 
 # ---------------------------- CONNECTION -------------------------
+print(os.environ)
 DB_CONN = (
-    f"mysql+pymysql://{modules.helpers.config["SEC_USERNAME"]}:{modules.helpers.config["SEC_MASTER_PD"]}@"
-    f"{modules.helpers.config["SEC_MASTER_ENDPOINT"]}:3306/{modules.helpers.config["SEC_MASTER_NAME"]}"
+    f"mysql+pymysql://{os.environ["SEC_USERNAME"]}:{os.environ["SEC_MASTER_PD"]}@"
+    f"{os.environ["SEC_MASTER_ENDPOINT"]}:3306/{os.environ["SEC_MASTER_NAME"]}"
 )
 Base = declarative_base()
 engine = create_engine(DB_CONN, echo=False, isolation_level="READ COMMITTED")
